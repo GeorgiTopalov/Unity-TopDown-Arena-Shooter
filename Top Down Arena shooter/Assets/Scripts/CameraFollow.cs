@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Cainos.PixelArtTopDown_Basic
 {
-    //let camera follow target
     public class CameraFollow : MonoBehaviour
     {
-        public Transform target;
-        public float lerpSpeed = 1.0f;
+        [SerializeField] private Transform player;
+
+        //public float lerpSpeed = 1.0f;
 
         private Vector3 offset;
 
@@ -16,17 +14,16 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void Start()
         {
-            if (target == null) return;
+            if (player == null) return;
 
-            offset = transform.position - target.position;
+            offset = transform.position - player.position;
         }
+
+
 
         private void Update()
         {
-            if (target == null) return;
-
-            targetPos = target.position + offset;
-            transform.position = Vector3.Lerp(transform.position, targetPos, lerpSpeed * Time.deltaTime);
+            transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);
         }
 
     }
